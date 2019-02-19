@@ -1,16 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "PostOrderActor.h"
-#include "Paths.h"
-#include "Kismet/KismetSystemLibrary.h"
-#include "StringConv.h"
+#include "Core/Public/Misc/Paths.h"
+#include "Engine/Classes/Kismet/KismetSystemLibrary.h"
+#include "Core/Public/Containers/StringConv.h"
 #include "string"
-#include "UserWidget.h"
-#include "ConstructorHelpers.h"
-#include "Kismet/GameplayStatics.h"
+#include "UMG/Public/Blueprint/UserWidget.h"
+#include "CoreUObject/Public/UObject/ConstructorHelpers.h"
+#include "Engine/Classes/Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "Engine/Engine.h"
 #include "Hint.h"
-#include "Kismet/KismetTextLibrary.h"
+#include "Engine/Classes/Kismet/KismetTextLibrary.h"
 
 UWorld * WorldContextObject;
 
