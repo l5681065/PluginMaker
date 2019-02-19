@@ -19,10 +19,14 @@ public:
 	typedef int(*FUN)(char* s, CallBack c);
 	bool GetDLLLoadResult();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(BlueprintReadOnly)
 		TSubclassOf< UUserWidget>  WBP_HintWidget;
 	UPROPERTY(EditAnywhere)
 		FString  APPIDString = "02ZKGC070D";
+	UPROPERTY(EditAnywhere)
+		FName MainLevelName;
+
+	void OpenMainLevel();
 	void ShowHint(int CallBackNum, char* ResultMessage);
 protected:
 	// Called when the game starts or when spawned

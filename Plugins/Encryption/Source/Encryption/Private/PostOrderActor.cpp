@@ -18,24 +18,26 @@ void  CallBackA(int CallBackNum, char* ResultMessage);
 
 void CallBackA(int CallBackNum, char* ResultMessage)
 {
+	TArray<AActor*> PostOrderActors;
+	UGameplayStatics::GetAllActorsOfClass(WorldContextObject, APostOrderActor::StaticClass(), PostOrderActors);
+	if (PostOrderActors.Num() == 0)
+	{
+		UE_LOG(LogTemp, Error, TEXT("PostOrderActors is NULL"));
+		return;
+	}
+	APostOrderActor * PostOrderActor = Cast<APostOrderActor>(PostOrderActors[0]);
+	if (!PostOrderActor)
+	{
+		UE_LOG(LogTemp, Error, TEXT("PostOrderActor is NULL"));
+		return;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("%s£¬%i"), ResultMessage, CallBackNum);
 	switch (CallBackNum)
 	{
-	case 1000:return;
-
-	default:UE_LOG(LogTemp, Warning, TEXT("%s£¬%i"), ResultMessage, CallBackNum);
-		TArray<AActor*> PostOrderActors;
-		UGameplayStatics::GetAllActorsOfClass(WorldContextObject, APostOrderActor::StaticClass(), PostOrderActors);
-		if (PostOrderActors.Num() == 0)
-		{
-			UE_LOG(LogTemp, Error, TEXT("PostOrderActors is NULL"));
-			return;
-		}
-		APostOrderActor * PostOrderActor = Cast<APostOrderActor>(PostOrderActors[0]);
-		if (!PostOrderActor)
-		{
-			UE_LOG(LogTemp, Error, TEXT("PostOrderActor is NULL"));
-			return;
-		}
+	case 1000:
+		PostOrderActor->OpenMainLevel();	
+		return;
+	default:		
 		PostOrderActor->ShowHint(CallBackNum, ResultMessage);
 		break;
 	}
@@ -80,7 +82,10 @@ bool APostOrderActor::GetDLLLoadResult()
 	return false;
 }
 
-
+void APostOrderActor::OpenMainLevel()
+{
+	UGameplayStatics::OpenLevel(WorldContextObject,MainLevelName);
+}
 
 void APostOrderActor::ShowHint(int CallBackNum, char* ResultMessage)
 {
