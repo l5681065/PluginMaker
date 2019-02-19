@@ -6,21 +6,26 @@
 #include "GameFramework/Actor.h"
 #include "PostOrderActor.generated.h"
 
+class UUserWidget;
+
 UCLASS()
-class ENCRYPTION_API APostOrderActor : public AActor
+class  APostOrderActor : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
+public:
 	APostOrderActor();
+	char * APPID;
+	typedef void(*CallBack)(int callBackNum, char* ResultMessage);
+	typedef int(*FUN)(char* s, CallBack c);
+	bool GetDLLLoadResult();
 
+	UPROPERTY(EditAnywhere)
+		TSubclassOf< UUserWidget>  WBP_HintWidget;
+	UPROPERTY(EditAnywhere)
+		FString  APPIDString = "02ZKGC070D";
+	void ShowHint(int CallBackNum, char* ResultMessage);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };
