@@ -39,7 +39,8 @@ public class Encryption : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-                "UMG"
+                "UMG",
+                "RenderCore"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
